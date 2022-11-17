@@ -46,8 +46,9 @@ ArrayList<Product> products;
     }
 
     private void initSlider() {
-        binding.carousel.addData(new CarouselItem("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg","caption"));
-        binding.carousel.addData(new CarouselItem("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg","caption"));
+        getOffers();
+        //binding.carousel.addData(new CarouselItem("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg","caption"));
+        //binding.carousel.addData(new CarouselItem("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg","caption"));
     }
 
     void initCategories(){
@@ -141,6 +142,29 @@ ArrayList<Product> products;
 
             }
         });
+        queue.add(request);
+    }
+    void getOffers(){
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest request = new StringRequest(Request.Method.GET,Constants.GET_OFFERS_URL,response -> {
+            try {
+                JSONObject obj = new JSONObject(response);
+                if(obj.getString("status").equals("success")){
+                    JSONArray offersArray = obj.getJSONArray("news_infos");
+                    for(int i=0;i<offersArray.length();i++){
+                        JSONObject offer = offersArray.getJSONObject(i);
+                        binding.carousel.addData(
+                                new CarouselItem(
+                                        Constants.NEWS_IMAGE_URL+offer.getString("image"),
+                                         offer.getString("title")
+                                )
+                        );
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        },error -> {});
         queue.add(request);
     }
     void initProducts(){

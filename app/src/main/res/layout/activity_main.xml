@@ -57,6 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="170dp"
                     app:autoPlay="true"
+                    app:showCaption="true"
                     app:showNavigationButtons="false" />
             </androidx.cardview.widget.CardView>
 
