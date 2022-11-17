@@ -2,6 +2,7 @@ package com.example.shopify.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ public CategoryAdapter(Context context, ArrayList<Category> categories){
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
 Category category = categories.get(position);
-holder.binding.label.setText(category.getName());
+holder.binding.label.setText(Html.fromHtml(category.getName()));
 holder.binding.image.setBackgroundColor(Color.parseColor(category.getColor()));
         Glide.with(context).load(category.getIcon()).into(holder.binding.image);
     }
