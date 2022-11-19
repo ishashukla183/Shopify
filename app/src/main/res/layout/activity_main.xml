@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor"
+    android:background="#E0CCF1"
     tools:context=".activities.MainActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FF5722"
-        android:orientation="horizontal"
+        android:background="#370943"
+        android:orientation="vertical"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,9 +24,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:mt_hint="Search your fav product"
-            app:mt_placeholder="Shopify"
-            app:mt_navIconEnabled="true"
             app:mt_maxSuggestionsCount="10"
+            app:mt_navIconEnabled="true"
+            app:mt_placeholder="Shopify"
             app:mt_speechMode="true" />
     </LinearLayout>
 
@@ -34,7 +34,7 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginVertical="8dp"
+        android:layout_marginTop="8dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="12dp">
+            android:padding="10dp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -55,35 +55,31 @@
                 <org.imaginativeworld.whynotimagecarousel.ImageCarousel
                     android:id="@+id/carousel"
                     android:layout_width="match_parent"
-                    android:layout_height="170dp"
+                    android:layout_height="150dp"
                     app:autoPlay="true"
-                    app:showCaption="true"
+                    app:showCaption="false"
                     app:showNavigationButtons="false" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
-                android:layout_gravity="center"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp">
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="10dp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/categoriesList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginHorizontal="5dp"/>
+                    android:layout_margin="10dp" />
             </androidx.cardview.widget.CardView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/productList"
                 android:layout_width="match_parent"
-                android:layout_gravity="center"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                />
+                android:layout_marginTop="16dp" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

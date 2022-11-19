@@ -46,7 +46,10 @@ ArrayList<Product> products;
     }
 
     private void initSlider() {
-        getOffers();
+        //getOffers();
+        binding.carousel.addData(new CarouselItem("https://i.pinimg.com/736x/66/03/cb/6603cb93d8db79514b2c051f04b638e4--all-smartphones-bangladesh.jpg",""));
+        binding.carousel.addData(new CarouselItem("https://cdna.artstation.com/p/assets/images/images/036/002/188/large/m-n-vinit-img-20210322-204116-186.jpg?1616482578",""));
+        binding.carousel.addData(new CarouselItem("https://onemg.gumlet.io/c3a61a56-32b5-4570-afa3-828579c3b344_1664876051.jpg",""));
         //binding.carousel.addData(new CarouselItem("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg","caption"));
         //binding.carousel.addData(new CarouselItem("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg","caption"));
     }
