@@ -10,8 +10,12 @@ import com.example.shopify.R;
 import com.example.shopify.adapters.CartAdapter;
 import com.example.shopify.databinding.ActivityCartBinding;
 import com.example.shopify.models.Product;
+import com.hishd.tinycart.model.Cart;
+import com.hishd.tinycart.model.Item;
+import com.hishd.tinycart.util.TinyCartHelper;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class CartActivity extends AppCompatActivity {
 
@@ -28,11 +32,24 @@ public class CartActivity extends AppCompatActivity {
 
         products=new ArrayList<>();
 
-        products.add(new Product("Product 1","___","123",45,45,45,1));
-        products.add(new Product("Product 2","___","123",45,45,45,1));
-        products.add(new Product("Product 3","___","123",45,45,45,1));
+        Cart cart = TinyCartHelper.getCart();
 
-        adapter=new CartAdapter(this,products);
+        for(Map.Entry<Item,Integer> item:cart.getAllItemsWithQty().entrySet())
+        {
+            Product product=(Product) item.getKey();
+            int quantity=item.getValue();
+            product.setQuantity(quantity);
+
+            products.add(product);
+        }
+
+
+        adapter=new CartAdapter(this, products, new CartAdapter.CartListner() {
+            @Override
+            public void onQuantityChanged() {
+                binding.subtotal.setText(String.format("INR %.2f",cart.getTotalPrice()));
+            }
+        });
 
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
         DividerItemDecoration itemDecoration=new DividerItemDecoration(this,layoutManager.getOrientation());
@@ -40,6 +57,7 @@ public class CartActivity extends AppCompatActivity {
         binding.cartList.addItemDecoration(itemDecoration);
         binding.cartList.setAdapter(adapter);
 
+        binding.subtotal.setText(String.format("INR %.2f",cart.getTotalPrice()));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

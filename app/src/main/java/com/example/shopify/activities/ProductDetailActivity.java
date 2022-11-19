@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -16,7 +17,10 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.shopify.R;
 import com.example.shopify.databinding.ActivityProductDetailBinding;
+import com.example.shopify.models.Product;
 import com.example.shopify.utils.Constants;
+import com.hishd.tinycart.model.Cart;
+import com.hishd.tinycart.util.TinyCartHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,6 +28,7 @@ import org.json.JSONObject;
 public class ProductDetailActivity extends AppCompatActivity {
 
     ActivityProductDetailBinding binding;
+    Product currentProduct;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +42,15 @@ public class ProductDetailActivity extends AppCompatActivity {
         getProductDetails(id);
         getSupportActionBar().setTitle(name);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Cart cart = TinyCartHelper.getCart();
+
+        binding.addToCartbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cart.addItem(currentProduct,1);
+            }
+        });
     }
 
     @Override
@@ -67,6 +81,17 @@ public class ProductDetailActivity extends AppCompatActivity {
                     binding.productDescription.setText(
                             Html.fromHtml(description)
                     );
+
+                    currentProduct = new Product(
+                            prodObj.getString("name"),
+                            Constants.PRODUCTS_IMAGE_URL+prodObj.getString("image"),
+                            prodObj.getString("status"),
+                            prodObj.getDouble("price"),
+                            prodObj.getDouble("price_discount"),
+                            prodObj.getInt("stock"),
+                            prodObj.getInt("id")
+                    );
+
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

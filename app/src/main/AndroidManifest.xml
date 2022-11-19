@@ -19,7 +19,7 @@
             android:name=".activities.CartActivity"
             android:exported="false"
             android:label="Shopping Cart"
-            android:theme="@style/Theme.Shopify.Actionbar"/>
+            android:theme="@style/Theme.Shopify.Actionbar" />
 
         <activity
             android:name=".activities.ProductDetailActivity"
