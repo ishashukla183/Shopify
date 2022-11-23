@@ -1,10 +1,17 @@
 package com.example.shopify.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,6 +26,11 @@ import com.example.shopify.databinding.ActivityMainBinding;
 import com.example.shopify.models.Category;
 import com.example.shopify.models.Product;
 import com.example.shopify.utils.Constants;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
 import org.json.JSONArray;
@@ -28,161 +40,81 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-ActivityMainBinding binding;
-CategoryAdapter categoryAdapter;
-ArrayList<Category> categories;
-ProductAdapter productAdapter;
-ArrayList<Product> products;
+
+    EditText email,pass,phone,addr;
+    Button SignUp,LogIn;
+    ProgressDialog progress;
+    FirebaseAuth mAuth;
+    FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        initCategories();
-        initProducts();
-        initSlider();
+        LogIn=findViewById(R.id.LogIn);
+        SignUp=findViewById(R.id.LSignUp);
+        email=findViewById(R.id.LEmail);
+        pass=findViewById(R.id.LPassword);
 
-    }
+        progress=new ProgressDialog(this);
+        mAuth=FirebaseAuth.getInstance();
+        mUser=mAuth.getCurrentUser();
 
-    private void initSlider() {
-        //getOffers();
-        binding.carousel.addData(new CarouselItem("https://i.pinimg.com/736x/66/03/cb/6603cb93d8db79514b2c051f04b638e4--all-smartphones-bangladesh.jpg",""));
-        binding.carousel.addData(new CarouselItem("https://cdna.artstation.com/p/assets/images/images/036/002/188/large/m-n-vinit-img-20210322-204116-186.jpg?1616482578",""));
-        binding.carousel.addData(new CarouselItem("https://onemg.gumlet.io/c3a61a56-32b5-4570-afa3-828579c3b344_1664876051.jpg",""));
-        //binding.carousel.addData(new CarouselItem("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg","caption"));
-        //binding.carousel.addData(new CarouselItem("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg","caption"));
-    }
-
-    void initCategories(){
-        categories = new ArrayList<>();
-        /*categories.add(new Category("Sports and Outdoor","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZxEKu0wDXe3xYom1L9V7rLIJIsngRigIPzw&usqp=CAU","#7997af","Some description",1));
-        categories.add(new Category("Sports and Outdoor","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZxEKu0wDXe3xYom1L9V7rLIJIsngRigIPzw&usqp=CAU","#7997af","Some description",1));
-        categories.add(new Category("Sports and Outdoor","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZxEKu0wDXe3xYom1L9V7rLIJIsngRigIPzw&usqp=CAU","#7997af","Some description",1)); */
-
-        categoryAdapter = new CategoryAdapter(this, categories);
-        getCategories();
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
-        binding.categoriesList.setLayoutManager(layoutManager);
-        binding.categoriesList.setAdapter(categoryAdapter);
-
-    }
-    void getCategories(){
-        RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Request.Method.GET, Constants.GET_CATEGORIES_URL, new Response.Listener<String>() {
+        SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(String response) {
-               //Log.e("err",response);
-                try {
-                    JSONObject mainObj = new JSONObject(response);
-                    if(mainObj.getString("status").equals("success")){
-                        JSONArray categoryArray=mainObj.getJSONArray("categories");
-                        for(int i=0;i<categoryArray.length();i++){
-                            JSONObject obj=categoryArray.getJSONObject(i);
-                            Category category = new Category(
-                                    obj.getString("name"),
-                                    Constants.CATEGORIES_IMAGE_URL+obj.getString("icon"),
-                                    obj.getString("color"),
-                                    obj.getString("brief"),
-                                    obj.getInt("id"));
-                            categories.add((category));
-                        }
-                        categoryAdapter.notifyDataSetChanged();
-                    }
-                    else{
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }, new Response.ErrorListener() {
-            @Override
-
-            public void onErrorResponse(VolleyError error) {
-
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,SignUp.class));
             }
         });
-        queue.add(request);
-    }
-    void getProducts(){
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url=Constants.GET_PRODUCTS_URL+"?count=8";
-        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+
+        LogIn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject obj = new JSONObject(response);
-                    if(obj.getString("status").equals("success")){
-                        JSONArray productArray = obj.getJSONArray("products");
-                        for(int i=0;i<productArray.length();i++){
-                            JSONObject prodObj=productArray.getJSONObject(i);
-                            Product product = new Product(
-                                    prodObj.getString("name"),
-                                    Constants.PRODUCTS_IMAGE_URL+prodObj.getString("image"),
-                                    prodObj.getString("status"),
-                                    prodObj.getDouble("price"),
-                                    prodObj.getDouble("price_discount"),
-                                    prodObj.getInt("stock"),
-                                    prodObj.getInt("id")
-                            );
-                            products.add(product);
-                        }
-                        productAdapter.notifyDataSetChanged();
-                    }
-                    else{
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
+            public void onClick(View v) {
+                Authentication();
             }
         });
-        queue.add(request);
     }
-    void getOffers(){
-        RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Request.Method.GET,Constants.GET_OFFERS_URL,response -> {
-            try {
-                JSONObject obj = new JSONObject(response);
-                if(obj.getString("status").equals("success")){
-                    JSONArray offersArray = obj.getJSONArray("news_infos");
-                    for(int i=0;i<offersArray.length();i++){
-                        JSONObject offer = offersArray.getJSONObject(i);
-                        binding.carousel.addData(
-                                new CarouselItem(
-                                        Constants.NEWS_IMAGE_URL+offer.getString("image"),
-                                         offer.getString("title")
-                                )
-                        );
-                    }
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        },error -> {});
-        queue.add(request);
-    }
-    void initProducts(){
-        products = new ArrayList<>();
-        /*products.add(new Product("Adidas Men Shorts", "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSd-I3l2TR1lSRokm0EZL_raW25o8ZfBsUAdBMUAxGO3YCNq9HGqzeZJ5deXi5OSxgHM0NxErKWSnBy-qOZie-w1yJvm5sxSHqUTP4LSHwmg4hUHBLm3-9oRg&usqp=CAE", "", 1.0, 1.0, 1, 1));
-        products.add(new Product("Adidas Men Shorts", "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSd-I3l2TR1lSRokm0EZL_raW25o8ZfBsUAdBMUAxGO3YCNq9HGqzeZJ5deXi5OSxgHM0NxErKWSnBy-qOZie-w1yJvm5sxSHqUTP4LSHwmg4hUHBLm3-9oRg&usqp=CAE", "", 1.0, 1.0, 1, 1));
-        products.add(new Product("Adidas Men Shorts", "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSd-I3l2TR1lSRokm0EZL_raW25o8ZfBsUAdBMUAxGO3YCNq9HGqzeZJ5deXi5OSxgHM0NxErKWSnBy-qOZie-w1yJvm5sxSHqUTP4LSHwmg4hUHBLm3-9oRg&usqp=CAE", "", 1.0, 1.0, 1, 1));
-        products.add(new Product("Adidas Men Shorts", "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSd-I3l2TR1lSRokm0EZL_raW25o8ZfBsUAdBMUAxGO3YCNq9HGqzeZJ5deXi5OSxgHM0NxErKWSnBy-qOZie-w1yJvm5sxSHqUTP4LSHwmg4hUHBLm3-9oRg&usqp=CAE", "", 1.0, 1.0, 1, 1));
-        products.add(new Product("Adidas Men Shorts", "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSd-I3l2TR1lSRokm0EZL_raW25o8ZfBsUAdBMUAxGO3YCNq9HGqzeZJ5deXi5OSxgHM0NxErKWSnBy-qOZie-w1yJvm5sxSHqUTP4LSHwmg4hUHBLm3-9oRg&usqp=CAE", "", 1.0, 1.0, 1, 1));
-        products.add(new Product("Adidas Men Shorts", "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSd-I3l2TR1lSRokm0EZL_raW25o8ZfBsUAdBMUAxGO3YCNq9HGqzeZJ5deXi5OSxgHM0NxErKWSnBy-qOZie-w1yJvm5sxSHqUTP4LSHwmg4hUHBLm3-9oRg&usqp=CAE", "", 1.0, 1.0, 1, 1)); */
 
-        productAdapter = new ProductAdapter(this, products);
-        getProducts();
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-        binding.productList.setLayoutManager(layoutManager);
-        binding.productList.setAdapter(productAdapter);
+    private void Authentication() {
+        String Email = email.getText().toString();
+        String password = pass.getText().toString();
+        if(password.isEmpty() || password.length()<6){
+            pass.setError("Password should be grater than 6 characters");
+        }
+        else{
+            progress.setMessage("Please Wait...");
+            progress.setTitle("Registration");
+            progress.setCanceledOnTouchOutside(false);
+            progress.show();
+
+           mAuth.signInWithEmailAndPassword(Email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+               @Override
+               public void onComplete(@NonNull Task<AuthResult> task) {
+                   if(task.isSuccessful()){
+                       progress.dismiss();
+
+                       NextActivity();
+                       Toast.makeText(MainActivity.this,"LogIn Successful !!",Toast.LENGTH_SHORT).show();
+
+                   }
+                   else{
+                       progress.dismiss();
+                       Toast.makeText(MainActivity.this,""+task.getException(),Toast.LENGTH_SHORT).show();
+
+                   }
+               }
+           });
+        }
     }
+
+
+
+    private void NextActivity() {
+        Intent intent = new Intent(MainActivity.this,Home.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
+    }
+
+
 }
