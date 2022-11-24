@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E0CCF1"
+    android:background="#76C7EC"
     tools:context=".activities.MainActivity">
 
     <TextView
         android:id="@+id/Lt1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
-        android:gravity="center"
-        android:text="Details"
         android:layout_marginTop="20dp"
-        android:textColor="@color/purple_700"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text="Shopify"
+        android:textColor="#15299A"
         android:textSize="35dp"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal" />
 
 
     <EditText
@@ -29,7 +29,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="#BDDAF1"
+        android:background="#FFFFFF"
         android:drawableLeft="@drawable/ic_baseline_email_24"
         android:drawablePadding="28dp"
         android:ems="10"
@@ -48,7 +48,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="#BDDAF1"
+        android:background="#FFFFFF"
         android:drawableLeft="@drawable/ic_baseline_info_24"
         android:drawablePadding="28dp"
         android:ems="10"
@@ -77,11 +77,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/LogIn"
         android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="serif"
         android:gravity="center"
         android:text="Don't have an account?"
-        android:textColor="@color/purple_700"
-        android:textSize="15dp"
+        android:textColor="#15299A"
+        android:textSize="18dp"
         android:textStyle="normal" />
 
     <com.google.android.material.button.MaterialButton

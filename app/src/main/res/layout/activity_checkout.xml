@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/backgroundColor"
+    android:background="#C5ABF3"
     android:orientation="vertical"
     tools:context=".activities.CheckoutActivity">
 
@@ -38,6 +38,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="15dp"
                         android:text="Cost Details"
+                        android:textColor="#030829"
                         android:textSize="16sp" />
 
                     <View
@@ -162,6 +163,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="15dp"
                         android:text="Information"
+                        android:textColor="#02092E"
                         android:textSize="16sp" />
 
                     <View
@@ -175,66 +177,73 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:background="@drawable/edittext_bg"
+                        android:background="#C3CAF3"
                         android:ems="10"
                         android:hint="Full Name"
                         android:inputType="textPersonName"
-                        android:padding="15dp" />
+                        android:padding="15dp"
+                        android:textColor="#071143"
+                        android:textColorHint="#091559" />
 
                     <EditText
                         android:id="@+id/emailBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:background="@drawable/edittext_bg"
+                        android:background="#C3CAF3"
                         android:ems="10"
                         android:hint="Email Address"
                         android:inputType="textPersonName"
-                        android:padding="15dp" />
+                        android:padding="15dp"
+                        android:textColorHint="#091559" />
 
                     <EditText
                         android:id="@+id/phoneBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:background="@drawable/edittext_bg"
+                        android:background="#C3CAF3"
                         android:ems="10"
                         android:hint="Phone Number"
                         android:inputType="textPersonName"
-                        android:padding="15dp" />
+                        android:padding="15dp"
+                        android:textColorHint="#091559" />
 
                     <EditText
                         android:id="@+id/addressBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:background="@drawable/edittext_bg"
+                        android:background="#C3CAF3"
                         android:ems="10"
                         android:hint="Address"
                         android:inputType="textPersonName"
-                        android:padding="15dp" />
+                        android:padding="15dp"
+                        android:textColorHint="#091559" />
 
                     <EditText
                         android:id="@+id/dateBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:background="@drawable/edittext_bg"
+                        android:background="#C3CAF3"
                         android:ems="10"
                         android:hint="Date of Shipping"
                         android:inputType="textPersonName"
-                        android:padding="15dp" />
+                        android:padding="15dp"
+                        android:textColorHint="#091559" />
 
                     <EditText
                         android:id="@+id/commentBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:background="@drawable/edittext_bg"
+                        android:background="#C3CAF3"
                         android:ems="10"
                         android:hint="Additional Comments"
                         android:inputType="textPersonName"
-                        android:padding="15dp" />
+                        android:padding="15dp"
+                        android:textColorHint="#091559" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -260,6 +269,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="15dp"
                         android:text="Product List"
+                        android:textColor="#020A35"
                         android:textSize="16sp" />
 
                     <View
