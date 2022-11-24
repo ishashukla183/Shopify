@@ -3,6 +3,7 @@ package com.example.shopify.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -19,6 +20,9 @@ import com.example.shopify.databinding.ActivityMainBinding;
 import com.example.shopify.models.Category;
 import com.example.shopify.models.Product;
 import com.example.shopify.utils.Constants;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.mancj.materialsearchbar.MaterialSearchBar;
 
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
 import org.json.JSONArray;
@@ -35,18 +39,38 @@ public class Home extends AppCompatActivity {
     ArrayList<Category> categories;
     ProductAdapter productAdapter;
     ArrayList<Product> products;
+    FirebaseAuth mAuth;
+    FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        binding.searchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
+            @Override
+            public void onSearchStateChanged(boolean enabled) {
 
-            binding = ActivityHomeBinding.inflate(getLayoutInflater());
-            setContentView(binding.getRoot());
-            initCategories();
-            initProducts();
-            initSlider();
+            }
 
+            @Override
+            public void onSearchConfirmed(CharSequence text) {
+                Intent intent = new Intent(Home.this, SearchActivity.class);
+                intent.putExtra("query", text.toString());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onButtonClicked(int buttonCode) {
+
+            }
+        });
+        initCategories();
+        initProducts();
+        initSlider();
+        mAuth=FirebaseAuth.getInstance();
+        mUser=mAuth.getCurrentUser();
         }
 
         private void initSlider() {
@@ -61,6 +85,7 @@ public class Home extends AppCompatActivity {
 
         void initCategories(){
             categories = new ArrayList<>();
+            //System.out.println(mAuth.getUid());
         /*categories.add(new Category("Sports and Outdoor","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZxEKu0wDXe3xYom1L9V7rLIJIsngRigIPzw&usqp=CAU","#7997af","Some description",1));
         categories.add(new Category("Sports and Outdoor","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZxEKu0wDXe3xYom1L9V7rLIJIsngRigIPzw&usqp=CAU","#7997af","Some description",1));
         categories.add(new Category("Sports and Outdoor","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZxEKu0wDXe3xYom1L9V7rLIJIsngRigIPzw&usqp=CAU","#7997af","Some description",1)); */
@@ -70,7 +95,6 @@ public class Home extends AppCompatActivity {
             GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
             binding.categoriesList.setLayoutManager(layoutManager);
             binding.categoriesList.setAdapter(categoryAdapter);
-
         }
         void getCategories(){
             RequestQueue queue = Volley.newRequestQueue(this);
@@ -176,9 +200,10 @@ public class Home extends AppCompatActivity {
             queue.add(request);
         }
         void initProducts(){
-            products = new ArrayList<>();
+
+        products = new ArrayList<>();
+        //products.add(new Product(, "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSd-I3l2TR1lSRokm0EZL_raW25o8ZfBsUAdBMUAxGO3YCNq9HGqzeZJ5deXi5OSxgHM0NxErKWSnBy-qOZie-w1yJvm5sxSHqUTP4LSHwmg4hUHBLm3-9oRg&usqp=CAE", "", 1.0, 1.0, 1, 1));
         /*products.add(new Product("Adidas Men Shorts", "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSd-I3l2TR1lSRokm0EZL_raW25o8ZfBsUAdBMUAxGO3YCNq9HGqzeZJ5deXi5OSxgHM0NxErKWSnBy-qOZie-w1yJvm5sxSHqUTP4LSHwmg4hUHBLm3-9oRg&usqp=CAE", "", 1.0, 1.0, 1, 1));
-        products.add(new Product("Adidas Men Shorts", "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSd-I3l2TR1lSRokm0EZL_raW25o8ZfBsUAdBMUAxGO3YCNq9HGqzeZJ5deXi5OSxgHM0NxErKWSnBy-qOZie-w1yJvm5sxSHqUTP4LSHwmg4hUHBLm3-9oRg&usqp=CAE", "", 1.0, 1.0, 1, 1));
         products.add(new Product("Adidas Men Shorts", "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSd-I3l2TR1lSRokm0EZL_raW25o8ZfBsUAdBMUAxGO3YCNq9HGqzeZJ5deXi5OSxgHM0NxErKWSnBy-qOZie-w1yJvm5sxSHqUTP4LSHwmg4hUHBLm3-9oRg&usqp=CAE", "", 1.0, 1.0, 1, 1));
         products.add(new Product("Adidas Men Shorts", "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSd-I3l2TR1lSRokm0EZL_raW25o8ZfBsUAdBMUAxGO3YCNq9HGqzeZJ5deXi5OSxgHM0NxErKWSnBy-qOZie-w1yJvm5sxSHqUTP4LSHwmg4hUHBLm3-9oRg&usqp=CAE", "", 1.0, 1.0, 1, 1));
         products.add(new Product("Adidas Men Shorts", "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSd-I3l2TR1lSRokm0EZL_raW25o8ZfBsUAdBMUAxGO3YCNq9HGqzeZJ5deXi5OSxgHM0NxErKWSnBy-qOZie-w1yJvm5sxSHqUTP4LSHwmg4hUHBLm3-9oRg&usqp=CAE", "", 1.0, 1.0, 1, 1));

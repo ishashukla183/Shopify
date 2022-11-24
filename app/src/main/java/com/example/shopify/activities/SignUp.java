@@ -29,7 +29,7 @@ import java.util.HashMap;
 public class SignUp extends AppCompatActivity {
 
     //TextView alreadyHaveAcc;
-    EditText email,pass,Name,phone,addr;
+    EditText email,pass,Name,phone;
     Button btnReg,btnLogin;
     ProgressDialog progress;
     FirebaseAuth mAuth;
@@ -43,7 +43,7 @@ public class SignUp extends AppCompatActivity {
         pass=findViewById(R.id.Password);
         btnReg=findViewById(R.id.SignUp);
         phone=findViewById(R.id.Phone);
-        addr=findViewById(R.id.Address);
+        //addr=findViewById(R.id.Address);
         //btnLogin=findViewById(R.id.LogIn);
         Name=findViewById(R.id.user);
         progress=new ProgressDialog(this);
@@ -69,7 +69,7 @@ public class SignUp extends AppCompatActivity {
         String password = pass.getText().toString();
         String name=Name.getText().toString();
         String Phone=phone.getText().toString();
-        String Address=addr.getText().toString();
+        //String Address=addr.getText().toString();
         if(password.isEmpty() || password.length()<6){
             pass.setError("Password should be grater than 6 characters");
         }
@@ -85,7 +85,7 @@ public class SignUp extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 progress.dismiss();
-                                AddDetailsToFirebase(Email,password,Phone,Address,name);
+                                AddDetailsToFirebase(Email,password,Phone,name);
                                 //sendUserToNextActivity();
                                 //Toast.makeText(SignUp.this,"Registeration Successful !!",Toast.LENGTH_SHORT).show();
 
@@ -100,7 +100,7 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
-    private void AddDetailsToFirebase(String email,String pass,String phone,String addr,String name) {
+    private void AddDetailsToFirebase(String email,String pass,String phone,String name) {
         final DatabaseReference Root;
         Root = FirebaseDatabase.getInstance().getReference();
         Root.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -111,7 +111,7 @@ public class SignUp extends AppCompatActivity {
                      userdata.put("name",name);
                      userdata.put("password",pass);
                      userdata.put("phone",phone);
-                     userdata.put("Address",addr);
+                     //userdata.put("Address",addr);
                      userdata.put("email",email);
 
                      Root.child("Users").child(phone).updateChildren(userdata)
