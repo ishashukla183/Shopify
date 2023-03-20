@@ -44,6 +44,7 @@ Enable users to create accounts. The admin can delete/edit the accounts.
 Adding/Updating the product details through the admin panel.
 
 **Technological features covered:**
+
 1]Realtime Database - Firebase
 
 2]Intent
@@ -59,3 +60,14 @@ Adding/Updating the product details through the admin panel.
  iv)material search bar
  
   v)carousel
+  
+**Preview of the app:**
+
+![WhatsApp Image 2022-11-28 at 14 12 19](https://user-images.githubusercontent.com/84145871/226409716-caf38b45-f676-46c9-a834-847827f36785.jpg)
+![WhatsApp Image 2022-11-28 at 14 12 21](https://user-images.githubusercontent.com/84145871/226410094-e1162f0f-afc0-48db-bb50-0b14bc65bb35.jpg)
+![WhatsApp Image 2022-11-28 at 14 12 25](https://user-images.githubusercontent.com/84145871/226410194-02c824c6-53a9-4c86-81a5-e8c8b8adaba1.jpg)
+![WhatsApp Image 2022-11-28 at 14 12 26](https://user-images.githubusercontent.com/84145871/226410582-5e172869-b119-4bee-b1d9-7ae146a853a4.jpg)
+![WhatsApp Image 2022-11-28 at 14 12 27](https://user-images.githubusercontent.com/84145871/226410645-b7a1062e-2a18-4f56-9164-0825c9455e59.jpg)
+![WhatsApp Image 2022-11-28 at 14 12 28](https://user-images.githubusercontent.com/84145871/226410715-5fbd6428-c86e-49da-a72b-1d1c50bbb992.jpg)
+
+  
