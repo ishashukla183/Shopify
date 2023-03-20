@@ -63,11 +63,16 @@ Adding/Updating the product details through the admin panel.
   
 **Preview of the app:**
 
-![WhatsApp Image 2022-11-28 at 14 12 19](https://user-images.githubusercontent.com/84145871/226409716-caf38b45-f676-46c9-a834-847827f36785.jpg)
-![WhatsApp Image 2022-11-28 at 14 12 21](https://user-images.githubusercontent.com/84145871/226410094-e1162f0f-afc0-48db-bb50-0b14bc65bb35.jpg)
-![WhatsApp Image 2022-11-28 at 14 12 25](https://user-images.githubusercontent.com/84145871/226410194-02c824c6-53a9-4c86-81a5-e8c8b8adaba1.jpg)
-![WhatsApp Image 2022-11-28 at 14 12 26](https://user-images.githubusercontent.com/84145871/226410582-5e172869-b119-4bee-b1d9-7ae146a853a4.jpg)
-![WhatsApp Image 2022-11-28 at 14 12 27](https://user-images.githubusercontent.com/84145871/226410645-b7a1062e-2a18-4f56-9164-0825c9455e59.jpg)
-![WhatsApp Image 2022-11-28 at 14 12 28](https://user-images.githubusercontent.com/84145871/226410715-5fbd6428-c86e-49da-a72b-1d1c50bbb992.jpg)
+Sign Up/Sign In
+
+<img src=https://user-images.githubusercontent.com/84145871/226412732-9c5cfd18-cdf0-4ad1-a816-cba10a8e99c2.jpg height="300"/>  <img src=https://user-images.githubusercontent.com/84145871/226412913-dc3abbae-731d-455b-93c9-21364742a4d3.jpg height="300"/>
+
+Home Page and Product Categories 
+
+<img src=https://user-images.githubusercontent.com/84145871/226409716-caf38b45-f676-46c9-a834-847827f36785.jpg  height="300"/>  <img src=https://user-images.githubusercontent.com/84145871/226413296-f4bc25c1-010b-4179-8b95-ab9614cae175.jpg height="300"/>  <img src=https://user-images.githubusercontent.com/84145871/226413964-e927e0f4-eb61-4cb3-941d-e560c53be5ca.jpg height="300" /> <img src=https://user-images.githubusercontent.com/84145871/226410194-02c824c6-53a9-4c86-81a5-e8c8b8adaba1.jpg  height="300"/>   
+
+Placing the order
+
+<img src=https://user-images.githubusercontent.com/84145871/226410582-5e172869-b119-4bee-b1d9-7ae146a853a4.jpg height="300"/> <img src=https://user-images.githubusercontent.com/84145871/226410645-b7a1062e-2a18-4f56-9164-0825c9455e59.jpg height="300"/>  <img src=https://user-images.githubusercontent.com/84145871/226410715-5fbd6428-c86e-49da-a72b-1d1c50bbb992.jpg height="300"/>
 
   
