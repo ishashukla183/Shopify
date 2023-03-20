@@ -4,7 +4,7 @@ An android application which serves as an e-commerce platform.
 Customers can order products belonging to different categories such as electronics,groceries,clothes,toys,etc.  
 The entire application is developed using android studio where java is used as the backend language.
 
-** Technology Stack **
+**Technology Stack**
 
 Android Studio - IDE used to develop the application
 Firebase - for user authentication
