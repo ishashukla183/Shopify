@@ -11,7 +11,7 @@ Firebase - for user authentication
 Public API - to fetch product details
 
 
-** Module-wise Scope: **
+**Module-wise Scope:**
 
 1] Sign Up/Sign In
 This module consists of the registration process and authentication for already registered users.
@@ -28,4 +28,12 @@ Enable users to create accounts. The admin can delete/edit the accounts.
 7]API
 Adding/Updating the product details through the admin panel.
 
-
+**Technological features covered:**
+1]Realtime Database - Firebase
+2]Intent
+3]Dependencies:
+ i)volley- Volley(for APIs) is an HTTP library that makes networking for Android apps easier and most importantly, faster.
+ ii)firebase-auth, core, storage, analytics
+ iii)tiny cart
+ iv)material search bar
+  v)carousel
